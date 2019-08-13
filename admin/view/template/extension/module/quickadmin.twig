@@ -1,0 +1,99 @@
+{{ header }}
+{{ column_left }}
+<div id="content">
+    <div class="page-header">
+        <div class="container-fluid">
+            <div class="pull-right">
+                <button type="submit" form="form-module" data-toggle="tooltip" title="{{ button_save }}"
+                    class="btn btn-primary">
+                    <i class="fa fa-save"></i>
+                </button>
+                <a href="{{ action.cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default">
+                    <i class="fa fa-reply"></i>
+                </a>
+            </div>
+            <h1>{{ heading_title }}</h1>
+            <ul class="breadcrumb">
+                {% for breadcrumb in breadcrumbs %}
+                <li>
+                    <a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        {% if error.permission %}
+        <div class="alert alert-danger alert-dismissible">
+            <i class="fa fa-exclamation-circle"></i>
+            {{ error_permission }}
+            <button class="close" data-dismiss="alert" type="button">&times;</button>
+        </div>
+        {% elseif error|length > 0 %}
+        <div class="alert alert-danger alert-dismissible">
+            <i class="fa fa-exclamation-circle"></i>
+            {{ error_warning }}
+            <button class="close" data-dismiss="alert" type="button">&times;</button>
+        </div>
+        {% endif %}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    <i class="fa fa-pencil"></i>
+                    {{ text_edit }}
+                </h3>
+            </div>
+            <div class="panel-body">
+                <form action="{{ action.save }}" method="post" enctype="multipart/form-data" id="form-module"
+                    class="form-horizontal">
+                    <!-- Module Name -->
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="input-name">{{ entry_name }}</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="name" value="{{ name }}" placeholder="{{ placeholder_name }}"
+                                id="input-name" class="form-control" />
+                            {% if error.name  %}
+                            <div class="text-danger">{{ error_name }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <!-- Status -->
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="input-status" name="status">
+                                {% if status %}
+                                <option selected="selected" value="1">{{ text_enabled }}</option>
+                                <option value="0">{{ text_disabled }}</option>
+                                {% else %}
+                                <option value="1">{{ text_enabled }}</option>
+                                <option selected="selected" value="0">{{ text_disabled }}</option>
+                                {% endif %}
+                            </select>
+                            {% if error.status  %}
+                            <div class="text-danger">{{ error_status }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <!-- Text editor -->
+                    <div class="form-group">
+                        {% if error.code  %}
+                        <div class="text-danger text-center">{{ error_code }}</div>
+                        {% endif %}
+                        <label class="col-sm-2 control-label" for="input-code">
+                            {{ entry_code }}
+                            <span data-toggle="tooltip" title="{{ help_message }}"></span>
+                        </label>
+                        <div class="col-sm-10">
+                            <textarea name="code" id="input-code" data-toggle="summernote" class="form-control"
+                                rows="30">{{ code }}</textarea>
+                        </div>
+                    </div>
+                    <input type="hidden" name="module_id" value="{{ module_id }}" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{{ footer }}
