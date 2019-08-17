@@ -1,4 +1,4 @@
-# OpenCart-Quickadmin-API
+# OpenCart Quickadmin API
 API Module for OpenCart v3
 
 ## Features
