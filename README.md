@@ -21,7 +21,7 @@ Once the module is installed, you can now add, edit o remove API modules from th
 ## Integration with OpenCart
 It's simply by creating new API users from system > users > API ;)
 
-### App Client Example
+### Client App Example
 [OpenCart QuickAdmin](https://github.com/PerezRE/OpenCart-Quickadmin)
 
 ### Notice
