@@ -1,0 +1,199 @@
+{{ header }}
+{{ column_left }}
+<div id="content">
+    <div class="page-header">
+        <div class="container-fluid">
+            <div class="pull-right">
+                <button type="submit" form="form-module" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary">
+                    <i class="fa fa-save"></i>
+                </button>
+                {% if is_setting_module == true %}
+                    <button type="submit" form="form-module" data-toggle="tooltip" title="{{ button_build_modules }}" class="btn btn-success">
+                        <i class="fa fa-file-code-o"></i>
+                    </button>
+                {% else %}
+                    <button type="submit" form="form-module" data-toggle="tooltip" title="{{ button_build }}" class="btn btn-success">
+                        <i class="fa fa-file-code-o"></i>
+                    </button>
+                {% endif %}
+                <a href="{{ action.cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default">
+                    <i class="fa fa-reply"></i>
+                </a>
+            </div>
+            <h1>{{ heading_title }}</h1>
+            <ul class="breadcrumb">
+                {% for breadcrumb in breadcrumbs %}
+                <li>
+                    <a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        {% if error.permission %}
+        <div class="alert alert-danger alert-dismissible">
+            <i class="fa fa-exclamation-circle"></i>
+            {{ error_permission }}
+            <button class="close" data-dismiss="alert" type="button">&times;</button>
+        </div>
+        {% elseif error|length > 0 %}
+        <div class="alert alert-danger alert-dismissible">
+            <i class="fa fa-exclamation-circle"></i>
+            {{ error_warning }}
+            <button class="close" data-dismiss="alert" type="button">&times;</button>
+        </div>
+        {% endif %}
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    <i class="fa fa-pencil"></i>
+                    {{ text_edit }}
+                </h3>
+            </div>
+
+            <div class="panel-body">
+                {% if is_setting_module == true %}
+                    <!-- Settings form -->
+                    <form action="{{ action.save }}" method="post" enctype="multipart/form-data" id ="form-module" class="form-horizontal">
+                        <input type="hidden" name="module_id" value="{{ module_id }}" />
+                        <input type="hidden" name="status" value="1"/>
+                        <!-- API Name -->
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="name">{{ entry_name }}</label>
+                            <div class="col-sm-10">
+                                <input tpye="text" class="form-control" id="name" name="name" value="{{ name }}" readonly/>
+                            </div>
+                        </div>
+                        <!-- API Filename -->
+                        <div class="form-group">
+                            <label for="filename" class="col-sm-2 control-label">
+                                {{ entry_filename }}
+                                <span data-toggle="tooltip" title="{{ help_file }}"></span>
+                            </label>
+                            <div class="col-sm-10">
+                                <input type="text" name="filename" value="{{ filename }}" id="filename" class="form-control"/>
+                                {% if error.filename  %}
+                                <div class="text-danger">{{ error_filename }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <!-- Delete last build -->
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="del_last">{{ entry_del_last }}</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" id="del_last" name="del_last">
+                                    {% if del_last %}
+                                        <option selected="selected" value="1">{{ text_enabled }}</option>
+                                        <option value="0">{{ text_disabled }}</option>
+                                    {% else %}
+                                        <option value="1">{{ text_enabled }}</option>
+                                        <option selected="selected" value="0">{{ text_disabled }}</option>
+                                    {% endif %}
+                                </select>
+                                {% if error.del_last  %}
+                                <div class="text-danger">{{ error_del_last }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <!-- API Description  -->
+                        <div class="form-group">
+                            <label for="description" class="col-sm-2 control-label">
+                                {{ entry_description }}
+                            </label>
+                            <div class="col-sm-10">
+                                <textarea name="description" id="description" rows="10" class="form-control">{{ description }}</textarea>
+                            </div>
+                        </div>
+                    </form>
+                {% else %}
+                    <!-- Generic module form -->
+                    <form action="{{ action.save }}" method="post" enctype="multipart/form-data" id="form-module" class="form-horizontal">
+                        <input type="hidden" name="module_id" value="{{ module_id }}" />
+                        <!-- Module Name -->
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="name">{{ entry_name }}</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="name" value="{{ name }}" placeholder="{{ placeholder_name }}" id="name" class="form-control" />
+                                {% if error.name  %}
+                                <div class="text-danger">{{ error_name }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <!-- Status -->
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="status">{{ entry_status }}</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" id="status" name="status">
+                                    {% if status %}
+                                        <option selected="selected" value="1">{{ text_enabled }}</option>
+                                        <option value="0">{{ text_disabled }}</option>
+                                    {% else %}
+                                        <option value="1">{{ text_enabled }}</option>
+                                        <option selected="selected" value="0">{{ text_disabled }}</option>
+                                    {% endif %}
+                                </select>
+                                {% if error.status  %}
+                                <div class="text-danger">{{ error_status }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <!-- Description -->
+                        <div class="form-group">
+                            <label for="description" class="col-sm-2 control-label">
+                                {{ entry_description }}
+                            </label>
+                            <div class="col-sm-10">
+                                <textarea name="description" id="description" rows="5" class="form-control">{{ description }}</textarea>
+                            </div>
+                        </div>
+                        <!-- Code editor -->
+                        <div class="form-group">
+                            {% if error.code  %}
+                            <div class="text-danger text-center">{{ error_code }}</div>
+                            {% endif %}
+                            <label class="col-sm-2 control-label" for="code">
+                                {{ entry_code }}
+                                <span data-toggle="tooltip" title="{{ help_message }}"></span>
+                            </label>
+                            <div class="col-sm-10">
+                                <textarea name="code" id="code" data-toggle="summernote" class="form-control" rows="30">{{ code }}</textarea>
+                            </div>
+                        </div>
+                    </form>
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.0/codemirror.min.js" integrity="sha512-N+2N5tIIjG6LoLwqAubDASB7qH5NxVg/F2cVHyZEqlvMkfRx3EgJC9UITIckOUd1EFBjy9vEDb42dUgwfTM5Ow==" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.0/codemirror.min.css" integrity="sha512-xIf9AdJauwKIVtrVRZ0i4nHP61Ogx9fSRAkCLecmE2dL/U8ioWpDvFCAy4dcfecN72HHB9+7FfQj3aiO68aaaw==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.0/theme/material.min.css" integrity="sha512-t93jzyjNejvKJ0LbK+VuLVp89Y8olz3sMmGPhKXYsTjSLuu3a3dVaZljCK6g04ShmsANEM8xe/OB+IaBE2LRBA==" crossorigin="anonymous" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.0/mode/meta.min.js" integrity="sha512-0J5vuXu3szfD020ywGviGtlUf8uOaEBAvpHObvPD95x/6ouSPqPaFzNhd+ZidGdQ/JUkmnwUSQkiBWaw+LybNQ==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.0/keymap/sublime.min.js" integrity="sha512-JLodqoX/DPULs76vfri2TVkE1VflxnhIWrxMtzvsvDqYHPKcw327FRWxlmSkhQ5A31pHBhCCfv5WJIjFiWT7aA==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.0/keymap/vim.min.js" integrity="sha512-iisxvAO2iQQD52++It/lOo+oBpZT/S7j3NevR7Vp0317oGVv48FoEr2/yLqt8CcJmSrnzvM9Cu7EIR/jYhYp+A==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.0/addon/hint/sql-hint.min.js" integrity="sha512-zVNOyYBOmDcGRo9/Tz+rYW8vjhAO4D/jqbj9+IIb1xWMU1ROyNWPCeWcOoBTquOBBmdiue78xJg5kkdWzsZJog==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.0/addon/comment/comment.min.js" integrity="sha512-soD6eVYj3pEqcNhj/o7b++cF1hK2/fkTZa4B7TROtWPJOKetXK56B4CY1xClPhZDLHBH5Nd/WnT5bHerp30ipg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.0/addon/edit/closebrackets.min.js" integrity="sha512-SS70d62R68X0qaUE9PPzc0+zXNvJzg11XpniHKLv46GS7SN99iboTRgc9f/guIFFh7d4ehoPi7iQJIojIQeJnQ==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.0/addon/edit/closetag.min.js" integrity="sha512-8Ai5rTwZGpdbVS8LHO3VegWyY7OauoOBLgz7xnrEbpivphLu2x/TShlyVfN3l4Rjx0+XE3hWWJFyzopv3Lo1yA==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.0/addon/edit/matchbrackets.min.js" integrity="sha512-zgTUY40c9HFb3Kr25lTW3gpnSt+xVc0yWPYwa6Yu7kChiaOHfNlyA4bM8Y3YLzjeQfrNFy40UcbOE/Cmmb29nQ==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.0/addon/edit/matchtags.min.js" integrity="sha512-q/FQZQVZpwUkYxhjfZZekmH74gSxVZ64hVJ16fVAn61bl/vW+vGGNs5NzLphNop0p/Xo/hWLCvnAXIFIiWOVfQ==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.0/addon/lint/json-lint.min.js" integrity="sha512-75qBBnF7D1zSKAd2k2ExN86M6GlMznuiqlPX1pc1xfq5OyvWhCSdacxz1Whdju8GWZkZOntwPcYDii/f1ARuyQ==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.0/addon/selection/active-line.min.js" integrity="sha512-ysQeDEwbdvERZqZCqFd64rVjSx4ExrC/r581h40cMF4e6rFWS6VxvdVxmSf/cLr+oe9mVxxzWSMhPJYSFyiVew==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.0/mode/php/php.min.js" integrity="sha512-m8sosGXUwyH6Ppzoy+CoQ/r5zAwZRGdNFUgGH81E3RDQkFnAsE4cP1I3tokvZwgMsDZB5mHxs+7egAgvhaCcMw==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.0/mode/clike/clike.min.js" integrity="sha512-HT3t3u7HfQ7USbSZa0Tk5caEnUfO8s58OWqMBwm96xaZAbA17rpnXXHDefR8ixVmSSVssbOv3W3OMh6mNX/XuQ==" crossorigin="anonymous"></script>
+<script>
+    var editor = CodeMirror.fromTextArea(document.querySelector('#code'), {
+        lineNumbers: true,
+        tabSize: 1,
+        matchBrackets: true,
+        mode: "text/x-php",
+        theme: 'material',
+        lineWrapping: true
+    });
+</script>
+{{ footer }}
