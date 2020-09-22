@@ -1,10 +1,12 @@
-# OpenCart QuickAPI Developer
-REST API Module creator for OpenCart v3 Developers
+# OpenCart QuickAPI Development
+A Module creator for APIs OpenCart v3 Developers
 
 ## Features
-This OpenCart Module allows to build your own "REST" API's in an easily way, just for testing, developing or learning coding APIs that could be consumed by client apps.
+This OpenCart Module allows to build your own code throught API's in an easily way, just for testing, developing or learning coding APIs that could be consumed by client apps.
 
-QuickAPI Developer "compiles" all modules added from the Extension/Module manager in one just single file and those functions defined in the module (or modules) marked as public could be consumed by the client, otherwise they won't be handled.
+QuickAPI Developer builds all modules added from the Extension/Module manager in one just single file and those functions defined in the module(s) marked as public could be consumed by the client, otherwise they won't be handled.
+
+The built file is allocated in `catalog/controller/api/`, so it will be public.
 
 ## How to install
 1. Download repository
@@ -15,7 +17,7 @@ QuickAPI Developer "compiles" all modules added from the Extension/Module manage
 5. Go through extension manager, choose modules and look for QuickAPI Developer module, then press the _install_ button. That's it!
 
 ## How to use it
-Once the module is installed, you can now add, edit or remove QuickAPI Developer modules from the extension manager which should be accesbile throught the users created under System > Users > API.
+Once the module is installed, you can now add, edit or remove QuickAPI Modules from the extension manager under the type of Modules, once you've added/edited/deleted modules, they should be accesbile throught the users created under System > Users > API.
 
 ## Integration with OpenCart
 It's very simple, just by creating new API users from the admin panel, go to System > Users > API ;)
