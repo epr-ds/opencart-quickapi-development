@@ -29,11 +29,11 @@ It's very simple, just by creating new API users from the admin panel, go to Sys
 All API modules are "compiled" in one file, so if you shared your API user and key, the final user is allowed to access to all functions coded.
 
 #### Warning & Recommendations
-This module doesn't build a real REST API, so the requested operations are handled through the query parameter called ``route``.
+This module doesn't build a real REST API, so the requested operations are handled through the query parameter called `route` by OpenCart which means that a request must have the following URL format: `https://myopencart.store/route=api/my_api_name`.
 
 Despite the module doesn't hurt any OpenCart files or data from DB. I highly recommend that this module must not be a deployable module for a store in production at least you know what you are doing!
 
-This module was built either for self-taught or practicing API development. 
+This module was built for self-taught abd practicing API development.
 So as is told, It's just for developing or testing app clients, that means allows you grab and set data from the system.
 
 I highly recommend to read [OpenCart DevDocs](http://docs.opencart.com/en-gb/developer/loading/) to know how coding can be improved using a world of built-in functions and classes made by OpenCart Team.
