@@ -11,7 +11,7 @@ $_['text_edit']			        = 'QuickAPI Developer';
 $_['text_enabled']              = 'Habilitado';
 $_['text_disabled']             = 'Deshabilitado';
 // Entry
-$_['entry_name']                = 'Nombre de la API';
+$_['entry_name']                = 'Nombre del módulo';
 $_['entry_status']              = 'Estado';
 $_['entry_code']		        = 'Código';
 $_['entry_filename']		    = 'Nombre de la API';

@@ -2,39 +2,28 @@
 
 class ControllerApi%s extends Controller
 {
-    public function __construct() {
-        $this->load->model("user/api");
-        $this->load->language('api/quickapi');
-	}
+    private function getApiSessions($api_id) {
+        $query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "api_session` WHERE api_id = '" . (int)$api_id . "'");
+        return $query->rows;
+    }
 
     private function validateSession()
     {
         $this->response->addHeader('Content-Type: application/json');
-
-        $api_token = $this->request->get('api_token');
-        
-        $json = array();
+        $api_token = $this->request->get['api_token'];
 
         if (!isset($api_token)){
-            $json['error'] = $this->language->get('error_token');
-            $this->response->setOutput(json_encode($json));
             return false;
         }
 
-        $api_sessions = $this->mode_user_api->getApiSessions($this->session->data['api_id']);
+        $api_sessions = $this->getApiSessions($this->session->data['api_id']);
         $validated = false;
         foreach($api_sessions as $api_session){
-            if ($api_token == $api_session['token'] && $this->request->server['REMOTE_ADDR'] == $api_session['ip']){
+            if ($api_token == $api_session['session_id']){
                 $validated = true;
                 break;
             }
         }
-
-        if (!$validated) {
-            $json['error'] = $this->language->get('error_session');
-            $this->response->setOutput(json_encode($json));
-        }
-
         return $validated;
     }
 
