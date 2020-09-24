@@ -31,14 +31,14 @@ class ControllerApi%s extends Controller
         if (!is_callable($callback))
             throw new Exception("Callback to handle request is not a callable function");
         if ($requestType == 'GET'){
-            $callback($this->resquest->get);
+            $callback($this->request->get);
         }elseif ($requestType == 'POST'){
-            $callback($this->resquest->post);
+            $callback($this->request->post);
         }elseif ($requestType == 'PUT'){
             parse_str(file_get_contents("php://input"), $put);
             $callback($put);
         }elseif ($requestType == 'DELETE'){
-            $callback($this->resquest->get);
+            $callback($this->request->get);
         }else{
             throw new Exception("Requeste Type is not supported");
         }
