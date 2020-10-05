@@ -2,11 +2,6 @@
 
 class ControllerApi%s extends Controller
 {
-    private function getApiSessions($api_id) {
-        $query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "api_session` WHERE api_id = '" . (int)$api_id . "'");
-        return $query->rows;
-    }
-
     private function validateSession()
     {
         $this->response->addHeader('Content-Type: application/json');
@@ -27,18 +22,19 @@ class ControllerApi%s extends Controller
         return $validated;
     }
 
-    private function processRequest($requestType = "GET", $callback){
-        if (!is_callable($callback))
+    private function processRequest($handlers){
+        $this->response->addHeader('Content-Type: application/json');
+        $method = $this->request->server['REQUEST_METHOD'];
+        if (!is_callable($handlers[$method]))
             throw new Exception("Callback to handle request is not a callable function");
-        if ($requestType == 'GET'){
-            $callback($this->request->get);
-        }elseif ($requestType == 'POST'){
-            $callback($this->request->post);
-        }elseif ($requestType == 'PUT'){
-            parse_str(file_get_contents("php://input"), $put);
-            $callback($put);
-        }elseif ($requestType == 'DELETE'){
-            $callback($this->request->get);
+        if ($method == 'GET'){
+            $handlers[$method]($this->request->get);
+        }elseif ($method == 'POST'){
+            $handlers[$method]($this->request->post);
+        }elseif ($method == 'PUT'){
+            $handlers[$method]($this->request->get);
+        }elseif ($method == 'DELETE'){
+            $handlers[$method]($this->request->get);
         }else{
             throw new Exception("Requeste Type is not supported");
         }

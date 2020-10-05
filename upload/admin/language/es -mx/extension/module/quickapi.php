@@ -1,37 +1,41 @@
 <?php
 // Heading
-$_['heading_title'] 		    = 'QuickAPI Developer';
-$_['settings_module_name']      = 'Configuración';
+$_['heading_title'] 		    = 'QuickAPI Development';
 // Module
-$_['text_new_module']           = 'Añadir módulo QuickAPI';
+$_['text_new_module']           = 'Añadir QuickAPI module';
 // Text
 $_['text_extension']		    = 'Extensiones';
-$_['text_success']		        = 'Correcto: Has modificado el modulo de %s!';
-$_['text_edit']			        = 'QuickAPI Developer';
+$_['text_success']		        = '¡Perfecto! Has modificado el módulo QuickAPI %s';
+$_['text_edit']			        = 'Editar módulo QuickAPI';
 $_['text_enabled']              = 'Habilitado';
-$_['text_disabled']             = 'Deshabilitado';
+$_['text_disabled']             = 'Dehabilitado';
+$_['text_built']                = 'Datos guardados';
+// Tabs
+$_['tab_controller']            = 'Controlador';
+$_['tab_model']                 = 'Modelo';
+$_['tab_lang']                  = 'Idioma';
 // Entry
 $_['entry_name']                = 'Nombre del módulo';
+$_['entry_api_name']            = 'Nombre de la API';
 $_['entry_status']              = 'Estado';
 $_['entry_code']		        = 'Código';
-$_['entry_filename']		    = 'Nombre de la API';
-$_['entry_description']         = 'Descripcion';
-$_['entry_del_last']            = 'Eliminar última construcción';
+$_['entry_description']         = 'Descripción';
 // Help
-$_['help_message'] 		        = '¡Siéntete libre de editar el módulo de tu API!';
-$_['help_file'] 		        = 'Nombre del archivo compilado que será usado en la ruta, p.e: ?route=api/quickapi';
+$_['help_code'] 		        = 'Códifica solo funciones miembro';
+$_['help_api_name'] 		    = 'No se permiten caracteres especiales o números.';
+$_['help_api_name_forbidden']   = 'Nombres prohibidos: %s';
 // Placeholder
-$_['placeholder_name']          = 'Nombre del módulo QuickAPI';
+$_['placeholder_module_name']   = 'ejemplo: API de Productos';
+$_['placeholder_api_name']      = 'ejemplo: productos';
 // Error
-$_['error_name'] 		        = 'El nombre del módulo no debe estar vacío.';
-$_['error_filename'] 		    = 'El nombre de la API no debe estar vacío.';
-$_['error_code'] 		        = 'No has escrito código. :(';
-$_['error_status'] 		        = '¡Habilita o deshabilita tu módulo a tráves del estado!';
-$_['error_permission'] 		    = 'No tienes permiso para editar esto.';
-$_['error_warning'] 		    = 'Hay problemas con los datos brindados.';
-$_['error_del_last'] 		    = 'Habilite o deshabilite la eliminación del último compilado';
+$_['error_permission'] 		    = 'No tienes permisos para editar éste módulo.';
+$_['error_warning'] 		    = 'Hay problemas con los datos proporcionados.';
+$_['error_name'] 		        = 'El nombre del módulo no debe estar en blanco.';
+$_['error_api_name_blank'] 		= 'Por favor, introduce el nombre de la API';
+$_['error_api_name_forbidden']  = 'El nombre dado está prohibido';
+$_['error_status'] 		        = 'Habilita o deshabilita tu API';
+$_['error_code'] 	            = 'El código del controlador no debe estar vacío';
 // Button
 $_['button_save'] 		        = 'Guardar';
 $_['button_cancel'] 	        = 'Cancelar';
-$_['button_build_modules']      = 'Compilar módulos QuickAPI';
-$_['button_build']              = 'Compilar módulo QuickAPI';
+$_['button_build']              = 'Construir modulo QuickAPI';
