@@ -1,12 +1,16 @@
 # OpenCart QuickAPI Development
-A Module creator for APIs OpenCart v3 Developers
+A very basic API creator for OpenCart APIs v3 Developers
 
 ## Features
-This OpenCart Module allows to build your own code throught API's in an easily way, just for testing, developing or learning coding APIs that could be consumed by client apps.
+This OpenCart Module allows to build your own code throught API's in an easily way, just for testing, developing or learning how to code APIs that could be consumed by client apps.
 
-QuickAPI Developer builds all modules added from the Extension/Module manager in one just single file and those functions defined in the module(s) marked as public could be consumed by the client, otherwise they won't be handled.
+QuickAPI Developement builds all modules added from the Extension/Module/QuickAPI manager split into different files.
 
-The built file is allocated in `catalog/controller/api/`, so it will be public.
+The OpenCart QuickAPI extension builds the code into different files based on OpenCart v3 MVC-L standard: controller, model and language, whose are located into `catalog/controller/api/api_name.php`, `catalog/model/extension/module/quickapi/api_name.php`, `catalog/language/en-gb/api/api_name.php`, respectively.
+
+The extension has with already built-in functions such as `processRequest` into the controller for handling the request based on the type, i.e: `GET`, `POST`, `PUT` and `DELETE`. (Read the code for more details).
+
+This extension allows to build code asynchronously so that it reflects change inmediately.
 
 ## How to install
 1. Download repository
@@ -17,24 +21,22 @@ The built file is allocated in `catalog/controller/api/`, so it will be public.
 5. Go through extension manager, choose modules and look for QuickAPI Developer module, then press the _install_ button. That's it!
 
 ## How to use it
-Once the module is installed, you can now add, edit or remove QuickAPI Modules from the extension manager under the type of Modules, once you've added/edited/deleted modules, they should be accesbile throught the users created under System > Users > API.
+Once the module is installed, you can now add, edit or remove QuickAPI Modules from the extension manager under the type of Modules, once you've added/edited/deleted modules and created an user through System > Users > API to grant access, they should be accesbile for any request.
 
 ## Integration with OpenCart
 It's very simple, just by creating new API users from the admin panel, go to System > Users > API ;)
 
 ### Client App Example
-[Here](https://github.com/PerezRE/OpenCart-Quickadmin) a client app which uses created APIs with this module.
-
-### Notice
-All API modules are "compiled" in one file, so if you shared your API user and key, the final user is allowed to access to all functions coded.
+[Here](https://github.com/PerezRE/opencart-quickadmin) a client app that uses created APIs with this module.
 
 #### Warning & Recommendations
 This module doesn't build a real REST API, so the requested operations are handled through the query parameter called `route` by OpenCart which means that a request must have the following URL format: `https://myopencart.store/route=api/my_api_name`.
 
+### Notice
 Despite the module doesn't hurt any OpenCart files or data from DB. I highly recommend that this module must not be a deployable module for a store in production at least you know what you are doing!
 
 This module was built for self-taught abd practicing API development.
-So as is told, It's just for developing or testing app clients, that means allows you grab and set data from the system.
+So as is told, It's just for developing or testing app clients, that means allows you grab and set data with custom format from the system.
 
 I highly recommend to read [OpenCart DevDocs](http://docs.opencart.com/en-gb/developer/loading/) to know how coding can be improved using a world of built-in functions and classes made by OpenCart Team.
 

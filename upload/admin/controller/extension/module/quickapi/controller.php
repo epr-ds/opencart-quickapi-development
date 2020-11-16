@@ -2,27 +2,8 @@
 
 class ControllerApi%s extends Controller
 {
-    private function validateSession()
+    protected function processRequest($handlers)
     {
-        $this->response->addHeader('Content-Type: application/json');
-        $api_token = $this->request->get['api_token'];
-
-        if (!isset($api_token)){
-            return false;
-        }
-
-        $api_sessions = $this->getApiSessions($this->session->data['api_id']);
-        $validated = false;
-        foreach($api_sessions as $api_session){
-            if ($api_token == $api_session['session_id']){
-                $validated = true;
-                break;
-            }
-        }
-        return $validated;
-    }
-
-    private function processRequest($handlers){
         $this->response->addHeader('Content-Type: application/json');
         $method = $this->request->server['REQUEST_METHOD'];
         if (!is_callable($handlers[$method]))
