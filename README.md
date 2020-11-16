@@ -43,5 +43,5 @@ I highly recommend to read [OpenCart DevDocs](http://docs.opencart.com/en-gb/dev
 
 
 ## Screenshots
-![Example QuickAPI Modules](https://i.ibb.co/Czjf1Kn/quickapi-modules.png "Created QuickAPI Modules")
-![Example Editing/Creating QuickAPI Module](https://i.ibb.co/X7ncSpC/quickapi.png "Creating/Editing Quick API module")
+[![Example QuickAPI code](https://i.postimg.cc/zGyhCmgs/module-name.png)](https://postimg.cc/BjGt3VNp)
+[![Example QuickAPI Moudle](https://i.postimg.cc/zXtWHDVw/module-code.png)](https://postimg.cc/HVMjfg0j "QuickApi Module")
